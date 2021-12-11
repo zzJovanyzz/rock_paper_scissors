@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+</head>
+<body>
+    
+
+    <script>
+	function computerPlay(){
+            possibleChoices = ["Rock", "Paper", "Scissors" ];
+            random_move =  Math.floor(Math.random() * possibleChoices.length);
+            return possibleChoices[random_move];
+        }
+
+        function gameRound(player_choice, computer_choice){
+            if ((player_choice.charAt(0).toUppercase + player_choice.slice(1).toLowercase) == "Rock" ){
+                if (computer_choice == "Scissors"){
+                    return "You Win! Rock beats Scissors!"
+                } else if (computer_choice == "Paper") {
+                    return "You Lose! Paper beats Rock!"
+                }
+                else {
+                    return "TIE! You both chose Rock!"
+                }
+            } else if ((player_choice.charAt(0).toUppercase + player_choice.slice(1).toLowercase) == "Paper"){
+                if (computer_choice == "Rock"){
+                    return "You Win! Paper beats Rock!"
+                } else if (computer_choice == "Scissors") {
+                    return "You Lose! Scissors beats Paper!"
+                }
+                else {
+                    return "TIE! You both chose Paper!"
+                }
+            } else {
+                if (computer_choice == "Paper"){
+                    return "You Win! Scissors beats Paper!"
+                } else if (computer_choice == "Rock") {
+                    return "You Lose! Rock beats Scissors!"
+                }
+                else {
+                    return "TIE! You both chose Scissors!"
+                }
+            }
+
+        }
+
+        function game(){
+            playerWins = 0
+            computerWins = 0
+            ties = 0
+            counter = 5
+            
+            
+            while (playerWins < 5 && computerWins < 5 ){
+                score = `Player score is ${playerWins} Computer score is ${computerWins} Number of ties is ${ties}`
+                playerChoice = prompt("Choose Rock, Paper, or Scissors")
+                computerChoice = computerPlay()
+                if ((gameRound(playerChoice, computerChoice)).slice(0, 7) == "You Win"){
+                    playerWins += 1
+                    console.log(score)
+                } else if ((gameRound(playerChoice, computerChoice)).slice(0, 8) == "You Lose"){
+                    computerWins += 1
+                    console.log(score)
+                } else {
+                    ties += 1
+                    console.log(score)
+                }
+            }
+
+            if (playerWins == 5){
+                return "You WON the game!"
+            }
+
+            if (computerWins == 5){
+                return "You LOST the game!"
+            }
+
+        }
+        
+    </script>
+</body>
+</html>
