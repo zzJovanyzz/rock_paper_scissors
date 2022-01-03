@@ -7,9 +7,34 @@
     <title>Rock Paper Scissors</title>
 </head>
 <body>
+
+
+    <button id="rock" onclick="gameRoundRock(); scoreCount(); winner()" >Rock</button>
+    <button id="paper" onclick="gameRoundPaper(); scoreCount(); winner()">Paper</button>
+    <button id="scissors" onclick="gameRoundScissors(); scoreCount(); winner()">Scissors</button>
+
+    <br>
+
+
+    <div id="results" >
+        
+    </div>
+
+    <div id="score">
+
+    </div>
     
 
     <script>
+        let playerScore = 0;
+        let computerScore = 0;
+        let ties = 0;
+        
+
+
+
+    
+
 	function computerPlay(){
             possibleChoices = ["Rock", "Paper", "Scissors" ];
             random_move =  Math.floor(Math.random() * possibleChoices.length);
@@ -17,69 +42,73 @@
         }
 
         function gameRound(player_choice, computer_choice){
-            if ((player_choice.charAt(0).toUppercase + player_choice.slice(1).toLowercase) == "Rock" ){
+            if (player_choice == "Rock" ){
                 if (computer_choice == "Scissors"){
-                    return "You Win! Rock beats Scissors!"
+                    document.getElementById("results").innerHTML = "<p>Computer Chose Scissors!<br>Rock beats Scissors!<br><span id ='myResult'>You Win</span>!</p>";
                 } else if (computer_choice == "Paper") {
-                    return "You Lose! Paper beats Rock!"
+                    document.getElementById("results").innerHTML = "<p>Computer Chose Paper!<br>Paper beats Rock!<br><span id ='myResult'>You Lose</span>!</p>";
                 }
                 else {
-                    return "TIE! You both chose Rock!"
+                    document.getElementById("results").innerHTML = "<p><span id ='myResult'>TIE</span>! You both chose Rock!</p>";
                 }
-            } else if ((player_choice.charAt(0).toUppercase + player_choice.slice(1).toLowercase) == "Paper"){
+            } else if (player_choice == "Paper"){
                 if (computer_choice == "Rock"){
-                    return "You Win! Paper beats Rock!"
+                    document.getElementById("results").innerHTML = "<p>Computer Chose Rock!<br>Paper beats Rock!<br><span id ='myResult'>You Win</span>!</p>";
                 } else if (computer_choice == "Scissors") {
-                    return "You Lose! Scissors beats Paper!"
+                    document.getElementById("results").innerHTML = "<p>Computer Chose Scissors!<br>Scissors beats Paper!<br><span id ='myResult'>You Lose</span>!</p>";
                 }
                 else {
-                    return "TIE! You both chose Paper!"
+                    document.getElementById("results").innerHTML = "<p><span id ='myResult'>TIE</span>! You both chose Paper!</p>";
                 }
             } else {
                 if (computer_choice == "Paper"){
-                    return "You Win! Scissors beats Paper!"
+                    document.getElementById("results").innerHTML = "<p>Computer Chose Paper!<br>Scissors beats Paper!<br><span id ='myResult'>You Win</span>!</p>";
                 } else if (computer_choice == "Rock") {
-                    return "You Lose! Rock beats Scissors!"
-                }
-                else {
-                    return "TIE! You both chose Scissors!"
-                }
-            }
-
-        }
-
-        function game(){
-            playerWins = 0
-            computerWins = 0
-            ties = 0
-            counter = 5
-            
-            
-            while (playerWins < 5 && computerWins < 5 ){
-                score = `Player score is ${playerWins} Computer score is ${computerWins} Number of ties is ${ties}`
-                playerChoice = prompt("Choose Rock, Paper, or Scissors")
-                computerChoice = computerPlay()
-                if ((gameRound(playerChoice, computerChoice)).slice(0, 7) == "You Win"){
-                    playerWins += 1
-                    console.log(score)
-                } else if ((gameRound(playerChoice, computerChoice)).slice(0, 8) == "You Lose"){
-                    computerWins += 1
-                    console.log(score)
+                    document.getElementById("results").innerHTML = "<p>Computer Chose Rock!<br>Rock beats Scissors!<br><span id ='myResult'>You Lose</span>!</p>";
                 } else {
-                    ties += 1
-                    console.log(score)
+                    document.getElementById("results").innerHTML = "<p><span id ='myResult'>TIE</span>! You both chose Scissors!</p>";
                 }
             }
 
-            if (playerWins == 5){
-                return "You WON the game!"
-            }
-
-            if (computerWins == 5){
-                return "You LOST the game!"
-            }
-
         }
+
+            
+
+            function gameRoundRock(){
+                let computerChoice = computerPlay();
+                gameRound("Rock", computerChoice);
+            }
+
+            function gameRoundPaper(){
+                let computer_choice = computerPlay();
+                gameRound("Paper", computer_choice);
+            }
+
+            function gameRoundScissors(){
+                let computer_choice = computerPlay();
+                gameRound("Scissors", computer_choice);
+            }
+
+            function scoreCount(){
+                  
+
+                if (document.getElementById("myResult").textContent == "You Win"){
+                    playerScore += 1;
+                } else if (document.getElementById("myResult").textContent.slice(0 ,8) == "You Lose"){
+                    computerScore += 1;
+                } else if (document.getElementById("myResult").textContent =="TIE" )  {
+                    ties += 1;
+                }
+                document.getElementById("score").innerHTML = `Player Wins:${playerScore}<br>Computer Wins:${computerScore}<br> Number of Ties:${ties}`;
+            }
+
+            function winner(){
+                if (playerScore >= 5){
+                    document.getElementById("results").innerHTML = "<p>Game Won!</p><br> <p> <button> <a href='index.html' style='text-decoration: none; color: black;'> Play Again?</a></button>" ;
+                } else if (computerScore >= 5){
+                    document.getElementById("results").innerHTML = "<p>Game Lost!</p><br> <p> <button> <a href='index.html' style='text-decoration: none; color: black;'s> Play Again?</a></button>";
+                }
+            }
         
     </script>
 </body>
