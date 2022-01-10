@@ -1,2 +1,3 @@
 # rock_paper_scissors
-My approach to the classic game through a command line program
+Rock Paper Scissors with a very simple UI
+Most current version ---> https://zzjovanyzz.github.io/rock_paper_scissors/
